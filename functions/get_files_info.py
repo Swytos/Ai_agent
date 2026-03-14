@@ -10,18 +10,15 @@ def get_files_info(working_directory, directory="."):
         # Will be True or False
         valid_target_dir = os.path.commonpath([working_dir_abs, target_dir]) == working_dir_abs
         if not valid_target_dir:
-            print(f'Error: Cannot list "{directory}" as it is outside the permitted working directory')
-            return
+            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
         if not os.path.isdir(target_dir):
-            print(f'Error: "{directory}" is not a directory')
-            return
+            return f'Error: "{directory}" is not a directory'
         dir_cont = []
 
         for entry in os.scandir(target_dir):
             dir_cont.append(f'- {entry.name}: file_size={entry.stat().st_size} bytes, is_dir={entry.is_dir()}')
 
-        print('\n'.join(dir_cont))
-        return
+        return '\n'.join(dir_cont)
     except Exception as e:
-        print(f"Error: {str(e)}")
-        return
+        return f"Error: {str(e)}"
+        
